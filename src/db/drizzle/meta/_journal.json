@@ -1,0 +1,20 @@
+{
+  "version": "5",
+  "dialect": "pg",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1695609892720,
+      "tag": "0000_lowly_karnak",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1695609991944,
+      "tag": "0001_wide_agent_zero",
+      "breakpoints": true
+    }
+  ]
+}
