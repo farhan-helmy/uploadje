@@ -2,7 +2,8 @@ import { DeleteObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import multer from "multer";
 import multerS3 from "multer-s3";
 import { createId } from "@paralleldrive/cuid2";
-import dotenv from 'dotenv';
+import dotenv from "dotenv";
+import { logger } from "../config/logger";
 
 dotenv.config();
 
@@ -41,7 +42,20 @@ const uploadJeStagingUpload = multer({
   }),
 });
 
-export const s3Strategy = {
-  uploadJeStagingUpload,
+const uploadJeStagingDelete = async (key: string) => {
+  const deleteObject = new DeleteObjectCommand({
+    Bucket: "uploadjestagingbucket",
+    Key: key,
+  });
+
+  try {
+    await s3.send(deleteObject);
+  } catch (err) {
+    logger.error(`Error deleting image: ${err}, something went wrong`);
+  }
 };
 
+export const s3Strategy = {
+  uploadJeStagingUpload,
+  uploadJeStagingDelete,
+};

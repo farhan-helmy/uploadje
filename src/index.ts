@@ -25,5 +25,5 @@ app.use("/v1/app", appRoute);
 app.use("/v1/image", imageRoute);
 
 app.listen(port, () => {
-  console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
+  console.log(`⚡️[UPLOADJE]: Server is running at http://localhost:${port}`);
 });

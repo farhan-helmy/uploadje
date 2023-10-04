@@ -7,6 +7,7 @@ export const images = pgTable("images", {
   id: text("id").primaryKey().$defaultFn(() => createId()),
   path: text("path").unique().notNull(),
   size: numeric("size").notNull(),
+  key: text("key").notNull(),
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at"),
   deletedAt: timestamp("deleted_at"),
@@ -19,3 +20,6 @@ export const imageRelations = relations(images, ({ one }) => ({
     references: [apps.id],
   }),
 }));
+
+export type Image = typeof images.$inferSelect
+export type NewImage = typeof images.$inferInsert

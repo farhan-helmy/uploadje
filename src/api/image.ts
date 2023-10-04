@@ -12,5 +12,8 @@ router
     s3Strategy.uploadJeStagingUpload.array("image"),
     imageService.create,
   )
+  .get("/", validateApp, imageService.getAll)
+  .get("/:imageId", validateApp, imageService.get)
+  .delete("/:imageId", validateApp, imageService.remove);
 
 export default router;

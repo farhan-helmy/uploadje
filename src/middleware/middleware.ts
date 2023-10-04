@@ -72,6 +72,8 @@ export const validateApp = async (
       return;
     }
 
+    res.locals.app = appResult as JwtPayload;
+    
     next();
   } catch (err) {
     logger.error("Application not authorized to upload");
