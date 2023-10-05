@@ -6,8 +6,10 @@ import userRoute from "./api/user";
 import appRoute from "./api/app";
 import imageRoute from "./api/image";
 import { logger } from "./config/logger";
+import { init } from "./utils/env";
 
 dotenv.config();
+init();
 
 const app: Express = express();
 const port = process.env.PORT;

@@ -7,7 +7,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const queryClient = postgres(process.env.DB_URL!);
+const queryClient = postgres(process.env.DB_URL);
 const db = drizzle(queryClient, {
     schema: {
         ...users,
