@@ -14,7 +14,7 @@ router
   .post(
     "/",
     validateJWT,
-    validateBody(createAppRequestBodySchema),
+    validateBody(createAppRequestBodySchema.partial({name: true})),
     appService.create,
   )
   .patch(

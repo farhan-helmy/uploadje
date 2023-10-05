@@ -6,6 +6,8 @@ settings:
 
 importers:
 
+  .: {}
+
   backend:
     dependencies:
       '@aws-sdk/client-s3':
@@ -35,6 +37,9 @@ importers:
       postgres:
         specifier: ^3.3.5
         version: 3.3.5
+      unique-names-generator:
+        specifier: ^4.7.1
+        version: 4.7.1
       winston:
         specifier: ^3.10.0
         version: 3.10.0
@@ -7859,6 +7864,11 @@ packages:
     dependencies:
       unique-slug: 4.0.0
     dev: true
+
+  /unique-names-generator@4.7.1:
+    resolution: {integrity: sha512-lMx9dX+KRmG8sq6gulYYpKWZc9RlGsgBR6aoO8Qsm3qvkSJ+3rAymr+TnV8EDMrIrwuFJ4kruzMWM/OpYzPoow==}
+    engines: {node: '>=8'}
+    dev: false
 
   /unique-slug@4.0.0:
     resolution: {integrity: sha512-WrcA6AyEfqDX5bWige/4NQfPZMtASNVxdmWR76WESYQVAACSgWcR6e9i0mofqqBxYFtL4oAxPIptY73/0YE1DQ==}

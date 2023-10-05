@@ -10,6 +10,7 @@ import { PostgresError } from "postgres";
 import { logger } from "../config/logger";
 import { App } from "../types/app.type";
 import { generateAppKey, generateAppSecret } from "../utils/secret";
+import { generateRandomName } from "../utils/generate-random-name";
 
 const get = async (req: Request, res: Response) => {
   try {
@@ -53,6 +54,10 @@ const getAll = async (req: Request, res: Response) => {
 
 const create = async (req: Request, res: Response) => {
   const app: App = req.body;
+
+  if (!app.name)
+    app.name = generateRandomName()
+
   try {
     app.userId = res.locals.user.id;
     app.appKey = generateAppKey();
