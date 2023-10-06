@@ -6,6 +6,7 @@ import userRoute from "./api/user";
 import appRoute from "./api/app";
 import imageRoute from "./api/image";
 import { logger } from "./config/logger";
+import "./config/config";
 
 dotenv.config();
 
