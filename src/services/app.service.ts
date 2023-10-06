@@ -16,7 +16,7 @@ const get = async (req: Request, res: Response) => {
     const app = await selectApp(res.locals.user.id, req.params.appId);
 
     if (!app) {
-      return res.status(404).json({ error: "App not found" });
+      return res.status(200).json({ error: "App not found" });
     }
 
     return res.status(200).json(app);
@@ -36,7 +36,7 @@ const getAll = async (req: Request, res: Response) => {
     const apps = await selectApps(res.locals.user.id);
 
     if (apps.length === 0) {
-      return res.status(404).json({ error: "Apps not found" });
+      return res.status(200).json([]);
     }
 
     return res.status(200).json(apps);
