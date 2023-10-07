@@ -9,6 +9,16 @@ const selectUserForLogin = (user: UserLoginRequestBody) => {
   });
 };
 
+const selectUserWithId = (id: string) => {
+  return db.query.users.findFirst({
+    where: eq(users.id, id),
+    columns: {
+      id: true,
+      email: true,
+    }
+  });
+};
+
 const selectUser = (email: string) => {
   return db.query.users.findFirst({
     where: eq(users.email, email),
@@ -41,6 +51,7 @@ const deleteUser = (id: string) => {
 export {
   deleteUser,
   insertUser,
+  selectUserWithId,
   selectUser,
   selectUserForLogin,
   selectUsers,
