@@ -108,10 +108,8 @@ export const action = async ({ request }: ActionFunctionArgs) => {
         });
 
       if (error) {
-        return json({ error: true, message: '/resource/apps GET failed' });
+        return json({ error: true, message: '/resource/app GET failed' });
       }
-
-      console.log(apps);
 
       return json(apps);
     }

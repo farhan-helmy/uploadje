@@ -10,13 +10,10 @@ export default function Layout() {
 
   return (
     <div className="flex sm:justify-center items-center sm:px-6 max-sm:pt-14 pb-20 h-screen sm:bg-neutral-100 flex-col gap-14">
-      <Link to="/" className="absolute left-8 top-6"><p className="font-semibold text-xl">Home</p></Link>
       <img src="logo-uploadje.svg" className="h-16" />
-
       <Card>
         <Outlet />
       </Card>
-
       {path === '/signup' ?
         <p className="self-center text-neutral-500">
           Already have an account?{' '}
