@@ -1,6 +1,6 @@
 node_modules
 .env
-backend/src/config/logs/*
+backend/src/config/logs/**
 .yarn
 dist
 tmp
