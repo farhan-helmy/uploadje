@@ -10,7 +10,7 @@ export default function Layout() {
 
   return (
     <div className="flex sm:justify-center items-center sm:px-6 max-sm:pt-14 pb-20 h-screen sm:bg-neutral-100 flex-col gap-14">
-      <img src="logo-uploadje.svg" className="h-16" />
+      <img src="/logo-uploadje.svg" className="h-16" />
       <Card>
         <Outlet />
       </Card>

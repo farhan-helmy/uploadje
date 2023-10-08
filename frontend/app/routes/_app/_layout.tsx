@@ -46,7 +46,7 @@ function Topbar({ user }: {user: { id: string; email: string} | null}) {
     <div className="flex border-b bg-white border-black-5 justify-center h-20 items-center">
       <div className="max-w-[1148px] w-full px-6 flex justify-between">
         <Link to="/apps" className="">
-          <img src="logo-uploadje.svg" className="h-9" />
+          <img src="/logo-uploadje.svg" className="h-9" />
         </Link>
 
         <div>
