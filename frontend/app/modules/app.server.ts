@@ -54,7 +54,7 @@ class App {
         headers: {
           'Authorization': `Bearer ${token}`
         },
-        body: {
+        body: name && {
           name
         },
         parseResponse: JSON.parse
