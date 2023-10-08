@@ -52,7 +52,7 @@ function Topbar({ user }: {user: { id: string; email: string} | null}) {
         <div>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <button className="px-2 h-10">{user?.email}</button>
+              <button className="px-2 h-10 flex gap-2 items-center justify-end"><span className='text-right'>{user?.email}</span><div className='h-8 w-8 rounded-full bg-black-3 flex-none border border-black-5'></div></button>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
               <DropdownMenuLabel>My Account</DropdownMenuLabel>

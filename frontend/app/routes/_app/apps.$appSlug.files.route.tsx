@@ -51,15 +51,19 @@ function FilesTable({ images }: {images: Image[]}) {
           <TableRow>
             <TableHead>Name</TableHead>
             <TableHead>Size</TableHead>
-            <TableHead className='text-right'>Date Added</TableHead>
+            <TableHead className="text-right">Date Added</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {images.map(image=>(
             <TableRow key={image.id}>
-              <TableCell className='flex items-center gap-2 text-ellipsis whitespace-pre'>
-                <img className='h-7 aspect-[3/2] rounded-lg object-cover border border-black-4' src={image.path} alt={image.path} />
-                <span className='truncate underline'>{image.path}</span>
+              <TableCell className="flex items-center gap-2 text-ellipsis whitespace-pre">
+                <img
+                  className="h-7 aspect-[3/2] rounded-lg object-cover border border-black-4"
+                  src={image.path}
+                  alt={image.path}
+                />
+                <span className="truncate underline">{image.path}</span>
               </TableCell>
               <TableCell className="min-w-[120px]">{image.size}</TableCell>
               <TableCell className="min-w-[160px] text-right">{dayjs().to(image.createdAt)}</TableCell>
