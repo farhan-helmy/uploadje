@@ -106,7 +106,8 @@ function CreateAppDialog() {
             <FormTextField
               name="name"
               label="App Name"
-              placeholder="My First App"
+              optional
+              placeholder="e.g. My First App"
             />
           </div>
           <FormButton label="Create app" />

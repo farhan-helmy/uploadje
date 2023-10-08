@@ -8,6 +8,7 @@ interface FormTextFieldProps extends
   label?: string;
   textarea?: boolean;
   name: string;
+  optional?: boolean;
 }
 
 export default function FormTextField({
@@ -15,13 +16,14 @@ export default function FormTextField({
   textarea,
   name,
   placeholder,
+  optional,
   ...props
 }: FormTextFieldProps) {
   const { error, getInputProps } = useField(name);
 
   return (
     <div className="space-y-2 flex-grow">
-      <label htmlFor={name}>{label}</label>
+      <label htmlFor={name}>{label}<span className='text-black-8'> {optional && '(Optional)'}</span></label>
       <div className="flex flex-col gap-1">
         {
           textarea ? (
