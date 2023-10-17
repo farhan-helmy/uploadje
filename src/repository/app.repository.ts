@@ -6,13 +6,21 @@ const selectApp = (userId: string, appId: string) => {
   return db.query.apps.findFirst({
     where: ((app, { eq, and }) =>
       and(eq(app.userId, userId), eq(app.id, appId))),
+    with: {
+      secrets: {
+        columns: {
+          id: true,
+          secretKey: true,
+          createdAt: true,
+        }
+      }
+    }
   });
 };
 
-const selectAppForAuth = (appId: string, appSecret: string) => {
+const selectAppForAuth = (appKey: string) => {
   return db.query.apps.findFirst({
-    where: ((app, { eq, and }) =>
-      and(eq(app.appKey, appId), eq(app.appSecret, appSecret))),
+    where: ((app, { eq }) => eq(app.appKey, appKey)),
   });
 };
 
@@ -36,4 +44,11 @@ const deleteApp = (appId: string) => {
   return db.delete(apps).where(eq(apps.id, appId));
 };
 
-export { deleteApp, insertApp, selectApp, selectAppForAuth, selectApps, updateApp };
+export {
+  deleteApp,
+  insertApp,
+  selectApp,
+  selectAppForAuth,
+  selectApps,
+  updateApp,
+};

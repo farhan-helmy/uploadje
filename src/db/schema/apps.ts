@@ -3,12 +3,12 @@ import { createId } from "@paralleldrive/cuid2";
 import { relations } from "drizzle-orm";
 import { users } from "./users";
 import { images } from "./images";
+import { secrets } from "./secrets";
 
 export const apps = pgTable("apps", {
   id: text("id").primaryKey().$defaultFn(() => createId()),
   name: text("name").notNull(),
   appKey: text("app_key").unique().notNull(),
-  appSecret: text("app_secret").unique().notNull(),
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at"),
   deletedAt: timestamp("deleted_at"),
@@ -20,6 +20,7 @@ export const appRelations = relations(apps, ({ one, many }) => ({
     fields: [apps.userId],
     references: [users.id],
   }),
+  secrets: many(secrets),
   images: many(images)
 }));
 

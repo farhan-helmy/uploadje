@@ -10,6 +10,7 @@ import { PostgresError } from "postgres";
 import { logger } from "../config/logger";
 import { App } from "../types/app.type";
 import { generateAppKey, generateAppSecret } from "../utils/secret";
+import { insertSecret } from "../repository/secret.repository";
 
 const get = async (req: Request, res: Response) => {
   try {
@@ -56,11 +57,20 @@ const create = async (req: Request, res: Response) => {
   try {
     app.userId = res.locals.user.id;
     app.appKey = generateAppKey();
-    app.appSecret = generateAppSecret();
+    const appSecret = generateAppSecret();
 
     const appCreated = await insertApp(app);
 
-    return res.status(201).json(appCreated);
+    const secretCreated = await insertSecret({
+      appId: appCreated[0].id,
+      secretKey: appSecret,
+    });
+
+    return res.status(201).json({
+      appKey: appCreated[0].appKey,
+      secretKey: secretCreated[0].secretKey,
+    });
+    
   } catch (err) {
     if (err instanceof PostgresError) {
       logger.error(err.message);
@@ -80,15 +90,16 @@ const update = async (req: Request, res: Response) => {
       return res.status(404).json({ error: "App not found" });
     }
 
-    if(req.body.name === app.name) {
-      return res.status(200).json({ message: "App name is the same, no changes applied" });
+    if (req.body.name === app.name) {
+      return res.status(200).json({
+        message: "App name is the same, no changes applied",
+      });
     }
 
     const appUpdated = await updateApp(req.body.name);
 
     return res.status(200).json(appUpdated[0]);
   } catch (err) {
-
     if (err instanceof PostgresError) {
       logger.error(err.message);
       res.status(400).json({ error: err.message });

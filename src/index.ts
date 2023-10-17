@@ -5,6 +5,7 @@ import authRoute from "./api/auth";
 import userRoute from "./api/user";
 import appRoute from "./api/app";
 import imageRoute from "./api/image";
+import secretRoute from "./api/secret";
 import { logger } from "./config/logger";
 import "./config/config";
 
@@ -23,6 +24,7 @@ app.use("", healthRoute);
 app.use("/v1/auth", authRoute);
 app.use("/v1/user", userRoute);
 app.use("/v1/app", appRoute);
+app.use("/v1/secret", secretRoute)
 app.use("/v1/image", imageRoute);
 
 app.listen(port, () => {

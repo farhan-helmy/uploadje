@@ -3,7 +3,7 @@ import { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import type { JwtPayload } from "jsonwebtoken";
 import { logger } from "../config/logger";
-import { selectAppForAuth } from "../repository/app.repository";
+import { selectSecret } from "../repository/secret.repository";
 
 export const validateBody = (schema: Schema) => {
   return async (req: Request, res: Response, next: NextFunction) => {
@@ -58,7 +58,7 @@ export const validateApp = async (
   const uploadjeAppSecretHeader = req.header("UPLOADJE_APP_SECRET");
 
   try {
-    const appResult = await selectAppForAuth(
+    const appResult = await selectSecret(
       uploadjeAppIdHeader!,
       uploadjeAppSecretHeader!,
     );
@@ -73,7 +73,7 @@ export const validateApp = async (
     }
 
     res.locals.app = appResult as JwtPayload;
-    
+
     next();
   } catch (err) {
     logger.error("Application not authorized to upload");
