@@ -3,7 +3,7 @@ node_modules
 src/config/logs/*
 .yarn
 dist
-/terraform/uploadje-secrets
+/terraform/uploadje-secrets.tf
 
 # Local .terraform directories
 **/.terraform/*
