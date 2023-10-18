@@ -21,6 +21,12 @@ crash.*.log
 # to change depending on the environment.
 *.tfvars
 *.tfvars.json
+*.pem
+*.key
+*.pub
+
+# temporary terraform secrets for uploadje
+/terraform/uploadje-secrets.tf
 
 # Ignore override files as they are usually used to override resources locally and so
 # are not checked in
