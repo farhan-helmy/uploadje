@@ -5,6 +5,6 @@ import { validateJWT } from "../middleware/middleware";
 const router = Router();
 
 router
-  .get("/:email", validateJWT, userService.getUser);
+  .get("/", validateJWT, userService.getUser);
 
 export default router;

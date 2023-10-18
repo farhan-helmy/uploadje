@@ -9,9 +9,9 @@ const selectUserForLogin = (user: UserLoginRequestBody) => {
   });
 };
 
-const selectUser = (email: string) => {
+const selectUser = (id: string) => {
   return db.query.users.findFirst({
-    where: eq(users.email, email),
+    where: eq(users.id, id),
     columns: {
       id: true,
       email: true,
