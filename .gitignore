@@ -3,6 +3,7 @@ node_modules
 src/config/logs/*
 .yarn
 dist
+*.DS_Store
 
 # Local .terraform directories
 **/.terraform/*
