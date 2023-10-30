@@ -34,10 +34,10 @@ const insertApp = (app: NewApp): Promise<App[]> => {
   return db.insert(apps).values(app).returning();
 };
 
-const updateApp = (name: string): Promise<App[]> => {
+const updateApp = (appId: string, name: string): Promise<App[]> => {
   return db.update(apps).set({
     name: name,
-  }).returning();
+  }).where(eq(apps.id, appId)).returning();
 };
 
 const deleteApp = (appId: string) => {

@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 import type { JwtPayload } from "jsonwebtoken";
 import { logger } from "../config/logger";
 import { selectSecret } from "../repository/secret.repository";
+import { selectApp, selectAppForAuth } from "../repository/app.repository";
 
 export const validateBody = (schema: Schema) => {
   return async (req: Request, res: Response, next: NextFunction) => {
@@ -54,17 +55,19 @@ export const validateApp = async (
   res: Response,
   next: NextFunction,
 ) => {
-  const uploadjeAppIdHeader = req.header("UPLOADJE_APP_ID");
+  const uploadjeAppKeyHeader = req.header("UPLOADJE_APP_KEY");
   const uploadjeAppSecretHeader = req.header("UPLOADJE_APP_SECRET");
 
   try {
+    const app = await selectAppForAuth(uploadjeAppKeyHeader!);
+    
     const appResult = await selectSecret(
-      uploadjeAppIdHeader!,
+      app?.id!,
       uploadjeAppSecretHeader!,
     );
 
     if (!appResult) {
-      logger.error("Application not authorized to upload or not exists");
+      logger.error(`Application key ${uploadjeAppKeyHeader} not authorized to upload or not exists`);
       res.status(401).json({
         error:
           "Please include UPLOADJE_APP_ID and UPLOADJE_APP_SECRET in the request header",
@@ -76,6 +79,7 @@ export const validateApp = async (
 
     next();
   } catch (err) {
+    console.log(err)
     logger.error("Application not authorized to upload");
     res.status(401).json({
       error:

@@ -1,7 +1,7 @@
 import { numeric, pgTable, text, timestamp } from "drizzle-orm/pg-core";
 import { createId } from "@paralleldrive/cuid2";
 import { relations } from "drizzle-orm";
-import { apps } from "./apps";
+import { folders } from "./folder";
 
 export const images = pgTable("images", {
   id: text("id").primaryKey().$defaultFn(() => createId()),
@@ -11,13 +11,13 @@ export const images = pgTable("images", {
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at"),
   deletedAt: timestamp("deleted_at"),
-  appId: text("app_id"),
+  folderId: text("folder_id"),
 });
 
 export const imageRelations = relations(images, ({ one }) => ({
-  app: one(apps, {
-    fields: [images.appId],
-    references: [apps.id],
+  folder: one(folders, {
+    fields: [images.folderId],
+    references: [folders.id],
   }),
 }));
 

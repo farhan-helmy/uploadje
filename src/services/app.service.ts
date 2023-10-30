@@ -96,7 +96,7 @@ const update = async (req: Request, res: Response) => {
       });
     }
 
-    const appUpdated = await updateApp(req.body.name);
+    const appUpdated = await updateApp(app.id, req.body.name);
 
     return res.status(200).json(appUpdated[0]);
   } catch (err) {

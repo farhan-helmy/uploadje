@@ -44,7 +44,7 @@ const getAll = async (req: Request, res: Response) => {
 const create = async (req: Request, res: Response) => {
   try {
     if (!req.files) {
-      logger.error("No images upload");
+      logger.error(`${res.locals.app.id} no images`);
       res.status(400).json({ error: "Please upload images" });
       return;
     }
@@ -64,7 +64,7 @@ const create = async (req: Request, res: Response) => {
         await insertImage({
           path: image.url,
           size: image.size.toString(),
-          appId: res.locals.app.id,
+          folderId: "",
           key: image.key,
         });
         logger.info(`Image inserted successfully: ${image.url}`);

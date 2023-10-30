@@ -4,6 +4,7 @@ import * as users from "./schema/users"
 import * as apps from "./schema/apps"
 import * as images from "./schema/images"
 import * as secrets from "./schema/secrets"
+import * as folders from "./schema/folder"
 
 
 const queryClient = postgres("postgres://postgres:mysecretpassword@localhost:5432/uploadjedev");
@@ -12,7 +13,8 @@ const db = drizzle(queryClient, {
         ...users,
         ...apps,
         ...images,
-        ...secrets
+        ...secrets,
+        ...folders
     }
 });
 

@@ -5,13 +5,13 @@ import { Image, images, NewImage } from "../db/schema/images";
 const selectImage = (appId: string, imageId: string) => {
   return db.query.images.findFirst({
     where: ((image, { eq, and }) =>
-      and(eq(image.appId, appId), eq(image.id, imageId))),
+      and(eq(image.folderId, appId), eq(image.id, imageId))),
   });
 };
 
 const selectImages = (appId: string) => {
   return db.query.images.findMany({
-    where: eq(images.appId, appId),
+    where: eq(images.folderId, appId),
   });
 };
 
