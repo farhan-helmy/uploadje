@@ -7,7 +7,7 @@ import * as secrets from "./schema/secrets"
 import * as folders from "./schema/folder"
 
 
-const queryClient = postgres("postgres://postgres:mysecretpassword@localhost:5432/uploadjedev");
+const queryClient = postgres("postgres://postgres:mysecretpassword@localhost:5432/uploadjeapi");
 const db = drizzle(queryClient, {
     schema: {
         ...users,
