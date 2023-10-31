@@ -25,7 +25,7 @@ const register = async (req: Request, res: Response): Promise<void> => {
       res.status(400).json({ error: err.message });
       return;
     }
-    logger.error("Something went wrong while creating user");
+    logger.error("Something went wrong while creating user", err);
     res.status(400).json({ error: "Something went wrong" });
   }
 };
