@@ -44,7 +44,7 @@ const update = async (req: Request, res: Response) => {
         const folder = await selectFolder(req.params.folderId, req.params.appId);
 
         if (!folder) {
-            return res.status(200).json({ error: "Folder not found" });
+            return res.status(400).json({ error: "Folder not found" });
         }
 
         if (folder.name === req.body.name) {
@@ -52,8 +52,8 @@ const update = async (req: Request, res: Response) => {
                 message: "Folder name is the same, no changes applied",
             });
         }
-        
-        const folderUpdated = await updateFolder(req.params.folderId, req.body);
+
+        const folderUpdated = await updateFolder(req.params.folderId, req.body.name);
 
         return res.status(200).json(folderUpdated[0]);
     } catch (err) {
