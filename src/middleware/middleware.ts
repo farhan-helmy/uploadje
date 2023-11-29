@@ -55,22 +55,31 @@ export const validateApp = async (
   res: Response,
   next: NextFunction,
 ) => {
-  const uploadjeAppKeyHeader = req.header("UPLOADJE_APP_KEY");
+  const uploadjeAppKeyHeader = req.header("UPLOADJE_APP_ID");
   const uploadjeAppSecretHeader = req.header("UPLOADJE_APP_SECRET");
 
   try {
     const app = await selectAppForAuth(uploadjeAppKeyHeader!);
-    
+
+    if (!app) {
+      logger.error(`Application key ${uploadjeAppKeyHeader} not authorized to upload or not exists`);
+      res.status(401).json({
+        error:
+          `Application key ${uploadjeAppKeyHeader} not authorized to upload or not exists`,
+      });
+      return;
+    }
     const appResult = await selectSecret(
       app?.id!,
       uploadjeAppSecretHeader!,
     );
 
+
     if (!appResult) {
       logger.error(`Application key ${uploadjeAppKeyHeader} not authorized to upload or not exists`);
       res.status(401).json({
         error:
-          "Please include UPLOADJE_APP_ID and UPLOADJE_APP_SECRET in the request header",
+          `Application secret ${uploadjeAppSecretHeader} not exists`,
       });
       return;
     }
@@ -83,7 +92,7 @@ export const validateApp = async (
     logger.error("Application not authorized to upload");
     res.status(401).json({
       error:
-        "Please include UPLOADJE_APP_ID and UPLOADJE_APP_SECRET in the request header",
+        err,
     });
   }
 };

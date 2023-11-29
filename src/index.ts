@@ -7,6 +7,7 @@ import appRoute from "./api/app";
 import imageRoute from "./api/image";
 import secretRoute from "./api/secret";
 import { logger } from "./config/logger";
+import cors from 'cors';
 import "./config/config";
 
 dotenv.config();
@@ -14,6 +15,7 @@ dotenv.config();
 const app: Express = express();
 const port = process.env.PORT;
 
+app.use(cors());
 app.use(express.json());
 app.use((req: Request, _: Response, next) => {
   logger.info(`${req.method} ${req.path}`);
